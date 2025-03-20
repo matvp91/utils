@@ -5,6 +5,7 @@ export default defineConfig({
     "event-manager": "./src/event-manager.ts",
     "math-utils": "./src/math-utils.ts",
     "array-utils": "./src/array-utils.ts",
+    assert: "./src/assert.ts",
   },
   splitting: false,
   sourcemap: true,
