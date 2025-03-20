@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "outDir": "dist",
+    "removeComments": true,
+    "target": "es6",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+  
+    // Strict checks
+    "alwaysStrict": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+
+    // Linter checks
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules/**/*"]
+}

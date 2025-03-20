@@ -1,0 +1,29 @@
+{
+  "name": "@matvp91/utils",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsup"
+  },
+  "files": ["dist"],
+  "exports": {
+    "./event-manager": {
+      "import": "./dist/event-manager.js",
+      "types": "./dist/event-manager.d.ts"
+    },
+    "./math-utils": {
+      "import": "./dist/math-utils.js",
+      "types": "./dist/math-utils.d.ts"
+    },
+    "./array-utils": {
+      "import": "./dist/array-utils.js",
+      "types": "./dist/array-utils.d.ts"
+    }
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2"
+  }
+}
