@@ -26,29 +26,27 @@ export class EventManager {
   private bindings_ = new Set<Binding>();
 
   listen = <T extends Target>(target: T, prepend?: boolean) =>
-    ((type, listener, context, options) => {
+    ((type, listener, ...rest) => {
       const binding = createBinding(
         target,
         type,
         listener,
-        context,
         false,
         prepend,
-        options,
+        rest,
       );
       this.bindings_.add(binding);
     }) as AddCallback<T>;
 
   listenOnce = <T extends Target>(target: T, prepend?: boolean) =>
-    ((type, listener, context, options) => {
+    ((type, listener, ...rest) => {
       const binding = createBinding(
         target,
         type,
         listener,
-        context,
         true,
         prepend,
-        options,
+        rest,
       );
       this.bindings_.add(binding);
     }) as AddCallback<T>;
@@ -88,10 +86,9 @@ function createBinding(
   target: Target,
   type: string,
   listener: Handler,
-  context?: unknown,
   once?: boolean,
   prepend?: boolean,
-  options?: IntendedAny,
+  rest: IntendedAny[] = [],
 ) {
   const methodMap = {
     add: target.addEventListener?.bind(target) ?? target.on?.bind(target),
@@ -106,7 +103,7 @@ function createBinding(
 
   const callback = async (...args: unknown[]) => {
     try {
-      await listener.apply(context, args);
+      await listener.apply(undefined, args);
       if (once) {
         remove();
       }
@@ -116,16 +113,15 @@ function createBinding(
   };
 
   if (prepend && methodMap.prepend) {
-    methodMap.prepend(type, callback, options);
+    methodMap.prepend(type, callback, ...rest);
   } else {
-    methodMap.add?.(type, callback, options);
+    methodMap.add?.(type, callback, ...rest);
   }
 
   return {
     target,
     type,
     listener,
-    context,
     once,
     remove,
   };
