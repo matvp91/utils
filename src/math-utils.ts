@@ -10,4 +10,8 @@ export class MathUtils {
   static clamp(value: number, min: number, max: number) {
     return Math.max(min, Math.min(value, max));
   }
+
+  static precise(seconds: number) {
+    return MathUtils.ms(seconds) / 1000;
+  }
 }
