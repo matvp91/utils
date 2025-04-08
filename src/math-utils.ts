@@ -12,6 +12,6 @@ export class MathUtils {
   }
 
   static precise(seconds: number) {
-    return MathUtils.ms(seconds) / 1000;
+    return Math.round((seconds + Number.EPSILON) * 1000) / 1000;
   }
 }
